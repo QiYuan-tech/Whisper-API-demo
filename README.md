@@ -39,3 +39,23 @@ python server.py
 curl -F "file=@examples/en.mp3" http://127.0.0.1:7860/whisper
 ```
 
+You should do this when you want to use other models:
+```bash
+# Use `base`
+curl -X POST -F "file=@examples/en.mp3" -F "model_type=base" http://127.0.0.1:7860/whisper
+
+# Use `base.en`
+curl -X POST -F "file=@examples/en.mp3" -F "model_type=base.en" http://127.0.0.1:7860/whisper
+```
+
+Comparison of different models:
+|`model_type`|Required VRAM|Parameters|Relative speed|
+|:-|:-|:-|:-|
+|`tiny.en` or `tiny`|~1 GB|39 M|~32x|
+|`base.en` or `base`|~1 GB|74 M|~16x|
+|`small.en` or `small`|~2 GB|244 M|~6x|
+|`medium.en` or `medium`|~5 GB|769 M|~2x|
+|`large`|~10 GB|1550 M|1x|
+
+The `.en` models for English-only applications tend to perform better, especially for the `tiny.en` and `base.en` models. We observed that the difference becomes less significant for the `small.en` and `medium.en` models.
+
