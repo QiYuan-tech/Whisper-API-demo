@@ -64,3 +64,43 @@ Comparison of different models:
 
 The `.en` models for English-only applications tend to perform better, especially for the `tiny.en` and `base.en` models. We observed that the difference becomes less significant for the `small.en` and `medium.en` models.
 
+You can also use `python` to send post requests:
+
+```python
+import requests
+
+# server host
+url = "http://127.0.0.1:7860/whisper"
+# files path
+file_path = "examples/en.mp3"
+
+# Send post
+# If you choose whisper model, you can:
+files = {'file': (file_path, open(file_path, 'rb'))}
+data = {'model_type': 'base'}
+response = requests.post(url, files=files, data=data)
+print(response.json())
+
+
+# If you don't choose whisper model, you can:
+#files = {'file': (file_path, open(file_path, 'rb'))}
+#response = requests.post(url, files=files)
+#print(response.json())
+```
+
+## Examples
+
+```bash
+$ curl -X POST -F "file=@en.mp3" -F "model_type=base.en" [http://gemlab.site:52011//whisper](http://127.0.0.1:7860/whisper)http://127.0.0.1:7860/whisper
+$
+$ {
+  "results": [
+    {
+      "model_type": "base",
+      "time": "0.90s",
+      "transcript": " Hello, my name is Sarah. I'm 25 years old and I come from a small town in California. I currently work as a graphic designer and I have a passion for creating visually appealing and innovative designs. I graduated from the University of California where I earned a bachelor's degree in graphic design and I've been working in the design industry for about three years. In my free time, I enjoy hiking in the beautiful California wilderness, experimenting with new recipes in the kitchen and playing the guitar. I also love photography and often capture the beauty of nature during my hikes."
+    }
+  ]
+}
+```
+
