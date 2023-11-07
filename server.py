@@ -4,16 +4,18 @@ from tempfile import NamedTemporaryFile
 import whisper
 import torch
 
-# Check if NVIDIA GPU is available
-torch.cuda.is_available()
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-
-# Load the Whisper model
-model = whisper.load_model("base", device=DEVICE, download_root="./")
-
 app = Flask(__name__)
 CORS(app)
 
+def whisper_model(model_type="base"):
+    # Check if NVIDIA GPU is available
+    torch.cuda.is_available()
+    DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+
+    # Load the Whisper model
+    model = whisper.load_model(model_type, device=DEVICE, download_root="./")
+    return model
+    
 @app.route("/")
 def hello():
     return "Welcome to the Voice-to-Text (Whisper) API"
@@ -23,7 +25,14 @@ def handler():
     if not request.files:
         # If the user didn't submit any files, return a 400 (Bad Request) error.
         abort(400)
-
+    # chose model. `tiny`, `base`, etc.
+    if not request.form:
+        model_type = "base"
+    if request.form:
+        model_type = request.form['model_type']
+    
+    # Load the Whisper model
+    model = whisper_model(model_type)
     # For each file, let's store the results in a list of dictionaries.
     results = []
 
@@ -39,7 +48,6 @@ def handler():
         result = model.transcribe(temp.name)
         # Now we can store the result object for this file.
         results.append({
-            'filename': filename,
             'transcript': result['text'],
         })
 
