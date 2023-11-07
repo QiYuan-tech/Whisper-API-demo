@@ -33,6 +33,11 @@ scoop install ffmpeg
 python server.py
 ```
 
+You can set the `host` and `port` of the service:
+```python
+python server.py --host 0.0.0.0 --port 8888
+```
+
 ### Use Server
 
 ```bash
