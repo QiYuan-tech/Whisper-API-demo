@@ -91,7 +91,7 @@ print(response.json())
 ## Examples
 
 ```bash
-$ curl -X POST -F "file=@en.mp3" -F "model_type=base.en" http://127.0.0.1:7860/whisper
+$ curl -X POST -F "file=@examples/en.mp3" -F "model_type=base.en" http://127.0.0.1:7860/whisper
 $
 $ {
   "results": [
