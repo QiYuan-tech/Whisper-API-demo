@@ -47,7 +47,7 @@ curl -F "file=@examples/en.mp3" http://127.0.0.1:7860/whisper
 You should do this when you want to use other models:
 ```bash
 # Use `base`
-curl -X POST -F "file=@examples/en.mp3" -F "model_type=base" http://127.0.0.1:7860/whisper
+curl -X POST -F "file=@examples/en.mp3" -F "model_type=large" http://127.0.0.1:7860/whisper
 
 # Use `base.en`
 curl -X POST -F "file=@examples/en.mp3" -F "model_type=base.en" http://127.0.0.1:7860/whisper
@@ -77,7 +77,7 @@ file_path = "examples/en.mp3"
 # Send post
 # If you choose whisper model, you can:
 files = {'file': (file_path, open(file_path, 'rb'))}
-data = {'model_type': 'base'}
+data = {'model_type': 'large'}
 response = requests.post(url, files=files, data=data)
 print(response.json())
 
@@ -91,7 +91,7 @@ print(response.json())
 ## Examples
 
 ```bash
-$ curl -X POST -F "file=@examples/en.mp3" -F "model_type=base.en" http://127.0.0.1:7860/whisper
+$ curl -X POST -F "file=@examples/en.mp3" -F "model_type=large" http://127.0.0.1:7860/whisper
 $
 $ {
   "results": [
