@@ -8,7 +8,7 @@ file_path = "examples/en.mp3"
 # Send post
 # If you choose whisper model, you can:
 files = {'file': (file_path, open(file_path, 'rb'))}
-data = {'model_type': 'base'}
+data = {'model_type': 'large'}
 response = requests.post(url, files=files, data=data)
 print(response.json())
 

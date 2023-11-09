@@ -9,7 +9,7 @@ import time
 app = Flask(__name__)
 CORS(app)
 
-def whisper_model(model_type="base"):
+def whisper_model(model_type="large"):
     # Check if NVIDIA GPU is available
     torch.cuda.is_available()
     DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
@@ -29,7 +29,7 @@ def handler():
         abort(400)
     # chose model. `tiny`, `base`, etc.
     if not request.form:
-        model_type = "base"
+        model_type = "large"
     if request.form:
         model_type = request.form['model_type']
     

@@ -1,7 +1,6 @@
-flask_cors==4.0.0
-whisper==1.1.10
-torch==2.0.1
-flask==1.1.2
 #git+https://github.com/openai/whisper.git
 openai-whisper
-requests
+requests==2.31.0
+flask==3.0.0
+flask_cors==4.0.0
+watchdog==3.0.0
